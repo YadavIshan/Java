@@ -18,14 +18,15 @@ public class ConvertListIntoMap {
         list.add(true);
         list.add(new Object());
 
-        System.out.println(list);
         Map<Integer, Object> map = new HashMap<Integer, Object>();
         // Converting to Stream , then converting it to map
         // Where list::indexOf is the key
         // Function.identity() is the value
         // (oldValue, newValue) -> oldValue is the merge function
+        int[] index = { 0 };
         map = list.stream()
-                .collect(Collectors.toMap(list::indexOf, Function.identity(), (oldValue, newValue) -> oldValue));
+                .collect(Collectors.toMap(e -> index[0]++, Function.identity(),
+                        (oldValue, newValue) -> oldValue));
         map.forEach((key, value) -> System.out.println(key + " : " + value));
     }
 }
